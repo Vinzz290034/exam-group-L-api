@@ -1,1 +1,1 @@
-# exam-group-L-api
+# Add GET /exams endpoint
