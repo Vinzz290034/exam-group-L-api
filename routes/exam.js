@@ -21,5 +21,21 @@ router.post('/', (req, res) => {
   res.status(201).json(newExam);
 });
 
+router.put('/:id', (req, res) => {
+  const examId = parseInt(req.params.id);
+  const examIndex = exams.findIndex((exam) => exam.id === examId);
+
+  if (examIndex === -1) {
+    return res.status(404).json({ message: 'Exam not found' });
+  }
+
+  exams[examIndex] = {
+    ...exams[examIndex],
+    ...req.body,
+    id: examId,
+  };
+
+  res.json(exams[examIndex]);
+});
 
 module.exports = router;
