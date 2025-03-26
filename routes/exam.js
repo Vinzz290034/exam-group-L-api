@@ -11,5 +11,15 @@ const exams = [
 router.get('/', (req, res) => {
   res.json(exams);
 });
+router.post('/', (req, res) => {
+  const newExam = {
+    id: exams.length + 1,
+    name: req.body.name,
+    date: req.body.date,
+  };
+  exams.push(newExam);
+  res.status(201).json(newExam);
+});
+
 
 module.exports = router;
