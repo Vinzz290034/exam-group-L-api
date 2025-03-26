@@ -1,4 +1,4 @@
-// # Modify routes/exams.js:
+// Modify routes/exams.js:
 
 const express = require('express');
 const router = express.Router();
@@ -21,7 +21,27 @@ router.post('/', (req, res) => {
   res.status(201).json(newExam);
 });
 
+router.put('/:id', (req, res) => {
+  const examId = parseInt(req.params.id);
+  const examIndex = exams.findIndex((exam) => exam.id === examId);
+
+
+// Providing some pulling request regarding to POST
+
+  if (examIndex === -1) {
+    return res.status(404).json({ message: 'Exam not found' });
+  }
+
+  exams[examIndex] = {
+    ...exams[examIndex],
+    ...req.body,
+    id: examId,
+  };
+
+  res.json(exams[examIndex]);
+});
 
 module.exports = router;
 
-// Providing some pulling request regarding to POST
+// Providing a pulling request
+
