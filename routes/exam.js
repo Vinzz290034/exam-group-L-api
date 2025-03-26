@@ -25,6 +25,9 @@ router.put('/:id', (req, res) => {
   const examId = parseInt(req.params.id);
   const examIndex = exams.findIndex((exam) => exam.id === examId);
 
+
+// Providing some pulling request regarding to POST
+
   if (examIndex === -1) {
     return res.status(404).json({ message: 'Exam not found' });
   }
@@ -41,3 +44,4 @@ router.put('/:id', (req, res) => {
 module.exports = router;
 
 // Providing a pulling request
+
