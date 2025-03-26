@@ -1,9 +1,41 @@
+// # Modify routes/exams.js:
+
 const express = require('express');
 const router = express.Router();
 
-// Placeholder route
+const exams = [
+  { id: 1, name: 'Math Exam', date: '2024-03-15' },
+  { id: 2, name: 'Science Exam', date: '2024-03-22' },
+];
+
 router.get('/', (req, res) => {
-  res.json({ message: 'Exams route placeholder' });
+  res.json(exams);
+});
+router.post('/', (req, res) => {
+  const newExam = {
+    id: exams.length + 1,
+    name: req.body.name,
+    date: req.body.date,
+  };
+  exams.push(newExam);
+  res.status(201).json(newExam);
+});
+
+router.put('/:id', (req, res) => {
+  const examId = parseInt(req.params.id);
+  const examIndex = exams.findIndex((exam) => exam.id === examId);
+
+  if (examIndex === -1) {
+    return res.status(404).json({ message: 'Exam not found' });
+  }
+
+  exams[examIndex] = {
+    ...exams[examIndex],
+    ...req.body,
+    id: examId,
+  };
+
+  res.json(exams[examIndex]);
 });
 
 module.exports = router;
