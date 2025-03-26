@@ -1,4 +1,4 @@
-// # Modify routes/exams.js:
+// Modify routes/exams.js:
 
 const express = require('express');
 const router = express.Router();
@@ -39,3 +39,5 @@ router.put('/:id', (req, res) => {
 });
 
 module.exports = router;
+
+// Providing a pulling request
